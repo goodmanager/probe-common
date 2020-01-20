@@ -1,5 +1,5 @@
-# probe-parent
+# probe-common
 
-> probe 项目代号
+probe-common 所有业务的公共库，每个具体的业务工程pom.xml都会引入该工程
 
-probe-parent 所有工程的根，基础公共库依赖的版本定义，每个工程的根pom.xml都会引入该工程
+> 尽量只依赖jdk 和 spring-boot-starter-test
