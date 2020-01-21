@@ -9,7 +9,7 @@ import java.util.Date;
 public class DateUtils {
 
 	/**
-	 * 将 localdate 转为 date
+	 * 将 LocalDate 转为 Date
 	 * 
 	 * @param localDate
 	 * @return
@@ -19,7 +19,7 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将 localdatetime 转为 date
+	 * 将 LocalDateTime 转为 Date
 	 * 
 	 * @param localDateTime
 	 * @return
@@ -29,7 +29,17 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将 date 转为 localdate
+	 * 将 long 转为 Date
+	 * 
+	 * @param time
+	 * @return
+	 */
+	public static Date toDate(long time) {
+		return toDate(toLocalDate(time));
+	}
+
+	/**
+	 * 将 Date 转为 LocalDate
 	 * 
 	 * @param date
 	 * @return
@@ -39,7 +49,17 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将 date 转为 localdatetime
+	 * 将 LocalDateTime 转为 LocalDate
+	 * 
+	 * @param dateTime
+	 * @return
+	 */
+	public static LocalDate toLocalDate(LocalDateTime dateTime) {
+		return dateTime.toLocalDate();
+	}
+
+	/**
+	 * 将 Date 转为 LocalDateTime
 	 * 
 	 * @param date
 	 * @return
@@ -49,7 +69,7 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将 time 转为 localdate
+	 * 将 long 转为 LocalDate
 	 * 
 	 * @param time
 	 * @return
@@ -59,12 +79,22 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将 time 转为 localdatetime
+	 * 将 long 转为 LocalDateTime
 	 * 
 	 * @param time
 	 * @return
 	 */
 	public static LocalDateTime toLocalDateTime(long time) {
 		return Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).toLocalDateTime();
+	}
+
+	/**
+	 * 将 LocalDate 转为 LocalDateTime
+	 * 
+	 * @param localDate
+	 * @return
+	 */
+	public static LocalDateTime toLocalDateTime(LocalDate localDate) {
+		return toLocalDateTime(toDate(localDate));
 	}
 }

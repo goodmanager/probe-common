@@ -1,5 +1,17 @@
 package com.felix.probe.util;
 
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.interfaces.ECPrivateKey;
+import java.security.interfaces.ECPublicKey;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class CryptUtils {
@@ -45,6 +57,38 @@ public class CryptUtils {
 			return true;
 		}
 		return false;
+	}
+
+	public static RSAPublicKey getRsaPublicKey(String rsaPublicKey)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+		byte[] keyBytes = rsaPublicKey.getBytes();
+		X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		return (RSAPublicKey) keyFactory.generatePublic(keySpec);
+	}
+
+	public static RSAPrivateKey getRsaPrivateKey(String rsaPrivateKey)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+		byte[] keyBytes = rsaPrivateKey.getBytes();
+		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+	}
+
+	public static ECPublicKey getEcPublicKey(String ecPublicKey)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+		byte[] keyBytes = ecPublicKey.getBytes();
+		X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory = KeyFactory.getInstance("EC");
+		return (ECPublicKey) keyFactory.generatePublic(keySpec);
+	}
+
+	public static ECPrivateKey getEcPrivateKey(String ecPrivateKey)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+		byte[] keyBytes = ecPrivateKey.getBytes();
+		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+		KeyFactory keyFactory = KeyFactory.getInstance("EC");
+		return (ECPrivateKey) keyFactory.generatePrivate(keySpec);
 	}
 
 }
