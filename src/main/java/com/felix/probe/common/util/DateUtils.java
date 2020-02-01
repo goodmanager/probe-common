@@ -1,4 +1,4 @@
-package com.felix.probe.util;
+package com.felix.probe.common.util;
 
 import java.time.Instant;
 import java.time.LocalDate;

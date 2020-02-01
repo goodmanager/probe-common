@@ -1,4 +1,4 @@
-package com.felix.probe.util;
+package com.felix.probe.common.util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.ECPrivateKey;
@@ -18,13 +18,15 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
-import com.felix.probe.common.JwtAlgorithmType;
+import com.felix.probe.common.constant.JwtAlgorithmType;
 
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
 	/**
-	 * 创建jwt token:当采用RSA和EC加密算法的时候需要相应的私钥和公钥 当采用SHA相关算法的时候只需秘钥
+	 * 创建jwt token
+	 * 当采用RSA和EC加密算法的时候需要相应的私钥和公钥
+	 * 当采用SHA相关算法的时候只需秘钥
 	 * 
 	 * @param privateKey
 	 * @param publicKey

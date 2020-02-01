@@ -1,4 +1,4 @@
-package com.felix.probe.util;
+package com.felix.probe.common.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static java.time.temporal.ChronoUnit.*;
+import com.felix.probe.common.constant.DateTimeUnit;
 
-import com.felix.probe.common.DateTimeUnit;
+import static java.time.temporal.ChronoUnit.*;
 
 public class DateTimeUtils {
 
