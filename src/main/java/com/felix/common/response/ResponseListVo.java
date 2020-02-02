@@ -1,4 +1,4 @@
-package com.felix.probe.common.response;
+package com.felix.common.response;
 
 import java.util.List;
 

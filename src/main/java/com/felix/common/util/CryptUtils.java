@@ -1,4 +1,4 @@
-package com.felix.probe.common.util;
+package com.felix.common.util;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;

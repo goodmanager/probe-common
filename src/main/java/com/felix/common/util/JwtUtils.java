@@ -1,4 +1,4 @@
-package com.felix.probe.common.util;
+package com.felix.common.util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.ECPrivateKey;
@@ -18,7 +18,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
-import com.felix.probe.common.constant.JwtAlgorithmType;
+import com.felix.common.constant.JwtAlgorithmType;
 
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);

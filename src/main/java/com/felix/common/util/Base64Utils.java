@@ -1,4 +1,4 @@
-package com.felix.probe.common.util;
+package com.felix.common.util;
 
 import org.apache.commons.codec.binary.Base64;
 

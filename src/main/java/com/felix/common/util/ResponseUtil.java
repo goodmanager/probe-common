@@ -1,11 +1,11 @@
-package com.felix.probe.common.util;
+package com.felix.common.util;
 
 import java.util.List;
 
-import com.felix.probe.common.response.PageVo;
-import com.felix.probe.common.response.ResponseListResult;
-import com.felix.probe.common.response.ResponseListVo;
-import com.felix.probe.common.response.ResponseVo;
+import com.felix.common.response.PageVo;
+import com.felix.common.response.ResponseListResult;
+import com.felix.common.response.ResponseListVo;
+import com.felix.common.response.ResponseVo;
 
 public class ResponseUtil {
 
