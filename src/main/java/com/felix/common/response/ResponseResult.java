@@ -7,11 +7,11 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class ResponseListResult<T> implements Serializable {
+public class ResponseResult<T> implements Serializable {
 
 	private static final long serialVersionUID = -4296742914196870305L;
 
 	private PageVo pageVo;
 
-	private ResponseListVo<T> responseListVo;
+	private ResponseRecordVo<T> responseRecordVo;
 }

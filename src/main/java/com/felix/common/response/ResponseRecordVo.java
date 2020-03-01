@@ -1,13 +1,14 @@
 package com.felix.common.response;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-public class ResponseVo<T> implements Serializable {
+public class ResponseRecordVo<T> implements Serializable {
 
 	private static final long serialVersionUID = -3765792961154517369L;
 
@@ -15,5 +16,5 @@ public class ResponseVo<T> implements Serializable {
 
 	private String message;
 
-	private T result;
+	private List<T> recordsList;
 }

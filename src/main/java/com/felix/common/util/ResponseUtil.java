@@ -3,9 +3,8 @@ package com.felix.common.util;
 import java.util.List;
 
 import com.felix.common.response.PageVo;
-import com.felix.common.response.ResponseListResult;
-import com.felix.common.response.ResponseListVo;
-import com.felix.common.response.ResponseVo;
+import com.felix.common.response.ResponseResult;
+import com.felix.common.response.ResponseRecordVo;
 
 public class ResponseUtil {
 
@@ -15,17 +14,17 @@ public class ResponseUtil {
 	 * @param <T>
 	 * @param errorCode
 	 * @param message
-	 * @param target
+	 * @param recordsList
 	 * @return
 	 */
-	public static <T> ResponseVo<T> createResponseResult(int errorCode, String message, T target) {
+	public static <T> ResponseRecordVo<T> createResponseResult(int errorCode, String message, List<T> recordsList) {
 
-		ResponseVo<T> responseVo = new ResponseVo<>();
-		responseVo.setErrorCode(errorCode);
-		responseVo.setMessage(message);
-		responseVo.setResult(target);
+		ResponseRecordVo<T> responseRecordVo = new ResponseRecordVo<>();
+		responseRecordVo.setErrorCode(errorCode);
+		responseRecordVo.setMessage(message);
+		responseRecordVo.setRecordsList(recordsList);
 
-		return responseVo;
+		return responseRecordVo;
 	}
 
 	/**
@@ -34,22 +33,22 @@ public class ResponseUtil {
 	 * @param <T>
 	 * @param errorCode
 	 * @param message
-	 * @param list
+	 * @param recordsList
 	 * @param pageVo
 	 * @return
 	 */
-	public static <T> ResponseListResult<T> createResponseResult(int errorCode, String message, List<T> list,
+	public static <T> ResponseResult<T> createResponseResult(int errorCode, String message, List<T> recordsList,
 			PageVo pageVo) {
 
-		ResponseListResult<T> responseResult = new ResponseListResult<>();
+		ResponseResult<T> responseResult = new ResponseResult<>();
 		responseResult.setPageVo(pageVo);
 
-		ResponseListVo<T> responseVo = new ResponseListVo<>();
-		responseVo.setErrorCode(errorCode);
-		responseVo.setMessage(message);
-		responseVo.setResult(list);
+		ResponseRecordVo<T> responseRecordVo = new ResponseRecordVo<>();
+		responseRecordVo.setErrorCode(errorCode);
+		responseRecordVo.setMessage(message);
+		responseRecordVo.setRecordsList(recordsList);
 
-		responseResult.setResponseListVo(responseVo);
+		responseResult.setResponseRecordVo(responseRecordVo);
 		return responseResult;
 	}
 }
