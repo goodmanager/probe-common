@@ -9,7 +9,7 @@ import com.felix.common.response.ResponseRecordVo;
 public class ResponseUtil {
 
 	/**
-	 * 返回单个 object
+	 * 返回所有数据
 	 * 
 	 * @param <T>
 	 * @param errorCode
@@ -28,7 +28,7 @@ public class ResponseUtil {
 	}
 
 	/**
-	 * 分页返回object及分页信息
+	 * 返回数据及分页信息
 	 * 
 	 * @param <T>
 	 * @param errorCode

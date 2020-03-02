@@ -27,8 +27,8 @@ public class MessageSourceUtils {
 		try {
 			Locale locale = LocaleContextHolder.getLocale();
 			message = messageSource.getMessage(key, params, locale);
-		} catch (Exception e) {
-			logger.error("解析message出错", e);
+		} catch (Exception ex) {
+			logger.error(ex.getMessage(), ex);
 		}
 		return message;
 	}
