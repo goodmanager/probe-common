@@ -17,10 +17,19 @@ public class BusinessException extends RuntimeException {
 
 	private int errorCode;
 
+	private int httpStatus;
+
 	private String message;
+
+	public BusinessException(int errorCode, String message, Object... objects) {
+		this.errorCode = errorCode;
+		this.httpStatus = 500;
+		this.message = String.format(message, objects);
+	}
 
 	public BusinessException(int errorCode, Object... objects) {
 		this.errorCode = errorCode;
+		this.httpStatus = 500;
 		this.message = MessageSourceUtils.getMessage(String.valueOf(errorCode), objects);
 	}
 
@@ -32,6 +41,14 @@ public class BusinessException extends RuntimeException {
 		this.errorCode = errorCode;
 	}
 
+	public int getHttpStatus() {
+		return httpStatus;
+	}
+
+	public void setHttpStatus(int httpStatus) {
+		this.httpStatus = httpStatus;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -39,4 +56,5 @@ public class BusinessException extends RuntimeException {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 }

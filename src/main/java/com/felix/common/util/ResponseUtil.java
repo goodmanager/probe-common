@@ -2,29 +2,19 @@ package com.felix.common.util;
 
 import java.util.List;
 
+import com.felix.common.response.ExceptionResponseResult;
 import com.felix.common.response.PageVo;
 import com.felix.common.response.ResponseResult;
-import com.felix.common.response.ResponseRecordVo;
 
 public class ResponseUtil {
 
-	/**
-	 * 返回所有数据
-	 * 
-	 * @param <T>
-	 * @param errorCode
-	 * @param message
-	 * @param recordsList
-	 * @return
-	 */
-	public static <T> ResponseRecordVo<T> createResponseResult(int errorCode, String message, List<T> recordsList) {
-
-		ResponseRecordVo<T> responseRecordVo = new ResponseRecordVo<>();
-		responseRecordVo.setErrorCode(errorCode);
-		responseRecordVo.setMessage(message);
-		responseRecordVo.setRecordsList(recordsList);
-
-		return responseRecordVo;
+	public static <T> ExceptionResponseResult<T> createExceptionResponseResult(int errorCode, int httpStatus,
+			String message) {
+		ExceptionResponseResult<T> responseResult = new ExceptionResponseResult<>();
+		responseResult.setErrorCode(errorCode);
+		responseResult.setHttpStatus(httpStatus);
+		responseResult.setMessage(message);
+		return responseResult;
 	}
 
 	/**
@@ -37,18 +27,15 @@ public class ResponseUtil {
 	 * @param pageVo
 	 * @return
 	 */
-	public static <T> ResponseResult<T> createResponseResult(int errorCode, String message, List<T> recordsList,
-			PageVo pageVo) {
+	public static <T> ResponseResult<T> createResponseResult(int errorCode, int httpStatus, String message,
+			List<T> records, PageVo pageVo) {
 
 		ResponseResult<T> responseResult = new ResponseResult<>();
 		responseResult.setPageVo(pageVo);
 
-		ResponseRecordVo<T> responseRecordVo = new ResponseRecordVo<>();
-		responseRecordVo.setErrorCode(errorCode);
-		responseRecordVo.setMessage(message);
-		responseRecordVo.setRecordsList(recordsList);
-
-		responseResult.setResponseRecordVo(responseRecordVo);
+		responseResult.setErrorCode(errorCode);
+		responseResult.setHttpStatus(httpStatus);
+		responseResult.setRecords(records);
 		return responseResult;
 	}
 }
