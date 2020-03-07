@@ -27,6 +27,12 @@ public class BusinessException extends RuntimeException {
 		this.message = String.format(message, objects);
 	}
 
+	public BusinessException(int errorCode, String message) {
+		this.errorCode = errorCode;
+		this.httpStatus = 500;
+		this.message = message;
+	}
+
 	public BusinessException(int errorCode, Object... objects) {
 		this.errorCode = errorCode;
 		this.httpStatus = 500;

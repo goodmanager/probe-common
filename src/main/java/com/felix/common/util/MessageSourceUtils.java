@@ -17,7 +17,7 @@ public class MessageSourceUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageSourceUtils.class);
 
-	public static String getMessage(String key, Object[] params) {
+	public static String getMessage(String key, Object... params) {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setCacheSeconds(-1);
 		messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());

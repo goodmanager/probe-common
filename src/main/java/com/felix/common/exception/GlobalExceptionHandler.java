@@ -2,7 +2,6 @@ package com.felix.common.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,7 +14,7 @@ import reactor.core.publisher.Mono;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	@ExceptionHandler(Exception.class)
 	public Mono<ResponseEntity<String>> gottaCatchEmAll(Exception ex) {
@@ -24,11 +23,15 @@ public class GlobalExceptionHandler {
 			BusinessException businessException = (BusinessException) ex;
 			responseResult = ResponseUtil.createExceptionResponseResult(businessException.getErrorCode(),
 					businessException.getHttpStatus(), businessException.getMessage());
+		} else if (ex instanceof ApplicationException) {
+			ApplicationException applicationException = (ApplicationException) ex;
+			responseResult = ResponseUtil.createExceptionResponseResult(-1, applicationException.getHttpStatus(),
+					ex.getMessage());
 		} else {
 			responseResult = ResponseUtil.createExceptionResponseResult(-1, 500, ex.getMessage());
 		}
-		log.error(ex.getMessage(), ex);
-		return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseResult.toString()));
+		logger.error(ex.getMessage(), ex);
+		return Mono.just(ResponseEntity.status(responseResult.getHttpStatus()).body(responseResult.toString()));
 	}
 
 }
