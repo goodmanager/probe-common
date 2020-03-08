@@ -6,10 +6,12 @@ import java.util.Locale;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.SimpleLocaleContext;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.i18n.LocaleContextResolver;
 
-public class RequestLocaleContextResolver implements LocaleContextResolver {
+@Component
+public class LocaleResolver implements LocaleContextResolver {
 
 	@Override
 	public LocaleContext resolveLocaleContext(ServerWebExchange exchange) {

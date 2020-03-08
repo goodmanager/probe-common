@@ -9,6 +9,6 @@ public class LocaleSupportConfig extends DelegatingWebFluxConfiguration {
 
 	@Override
 	protected LocaleContextResolver createLocaleContextResolver() {
-		return new RequestLocaleContextResolver();
+		return new LocaleResolver();
 	}
 }

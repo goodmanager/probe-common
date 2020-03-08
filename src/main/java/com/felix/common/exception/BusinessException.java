@@ -1,19 +1,17 @@
 package com.felix.common.exception;
 
-import com.felix.common.util.MessageSourceUtils;
-
-import lombok.ToString;
-
 /**
  * 业务异常
  * 
  * @author coral
  *
  */
-@ToString
 public class BusinessException extends RuntimeException {
 
-	private static final long serialVersionUID = -1936557387495630539L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8175638207304045557L;
 
 	private int errorCode;
 
@@ -21,22 +19,12 @@ public class BusinessException extends RuntimeException {
 
 	private String message;
 
-	public BusinessException(int errorCode, String message, Object... objects) {
-		this.errorCode = errorCode;
-		this.httpStatus = 500;
-		this.message = String.format(message, objects);
-	}
-
-	public BusinessException(int errorCode, String message) {
-		this.errorCode = errorCode;
-		this.httpStatus = 500;
-		this.message = message;
-	}
+	private Object[] objects;
 
 	public BusinessException(int errorCode, Object... objects) {
 		this.errorCode = errorCode;
 		this.httpStatus = 500;
-		this.message = MessageSourceUtils.getMessage(String.valueOf(errorCode), objects);
+		this.objects = objects;
 	}
 
 	public int getErrorCode() {
@@ -63,4 +51,11 @@ public class BusinessException extends RuntimeException {
 		this.message = message;
 	}
 
+	public Object[] getObjects() {
+		return objects;
+	}
+
+	public void setObjects(Object[] objects) {
+		this.objects = objects;
+	}
 }

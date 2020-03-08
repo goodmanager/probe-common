@@ -1,7 +1,5 @@
 package com.felix.common.exception;
 
-import com.felix.common.util.MessageSourceUtils;
-
 import lombok.ToString;
 
 @ToString
@@ -15,22 +13,12 @@ public class ApplicationException extends RuntimeException {
 
 	private int httpStatus;
 
-	public ApplicationException(int errorCode, int httpStatus, String message, Object... objects) {
-		this.errorCode = errorCode;
-		this.httpStatus = httpStatus;
-		this.message = String.format(message, objects);
-	}
-
-	public ApplicationException(int errorCode, int httpStatus, String message) {
-		this.errorCode = errorCode;
-		this.httpStatus = httpStatus;
-		this.message = message;
-	}
+	private Object[] objects;
 
 	public ApplicationException(int errorCode, int httpStatus, Object... objects) {
 		this.errorCode = errorCode;
 		this.httpStatus = httpStatus;
-		this.message = MessageSourceUtils.getMessage(String.valueOf(errorCode), objects);
+		this.objects = objects;
 	}
 
 	public int getErrorCode() {
@@ -55,6 +43,14 @@ public class ApplicationException extends RuntimeException {
 
 	public void setHttpStatus(int httpStatus) {
 		this.httpStatus = httpStatus;
+	}
+
+	public Object[] getObjects() {
+		return objects;
+	}
+
+	public void setObjects(Object[] objects) {
+		this.objects = objects;
 	}
 
 }
