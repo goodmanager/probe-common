@@ -1,11 +1,4 @@
-package com.felix.common.util;
-
-import org.slf4j.MDC;
-import reactor.core.publisher.Signal;
-import reactor.core.publisher.SignalType;
-import reactor.util.context.Context;
-
-import static com.felix.common.log.MdcHeaderFilter.CONTEXT_MAP;
+package com.felix.common.log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +6,15 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class LogTrackUtils {
+import org.slf4j.MDC;
+
+import reactor.core.publisher.Signal;
+import reactor.core.publisher.SignalType;
+import reactor.util.context.Context;
+
+import static com.felix.common.log.MdcHeaderFilter.CONTEXT_MAP;
+
+public class LogHelper {
 
 	public static <T> Consumer<Signal<T>> logOnNext(Consumer<T> log) {
 		return signal -> {
@@ -21,6 +22,7 @@ public class LogTrackUtils {
 				return;
 
 			Optional<Map<String, String>> maybeContextMap = signal.getContext().getOrEmpty(CONTEXT_MAP);
+
 			if (maybeContextMap.isPresent()) {
 				log.accept(signal.get());
 			} else {
@@ -40,6 +42,7 @@ public class LogTrackUtils {
 				return;
 
 			Optional<Map<String, String>> maybeContextMap = signal.getContext().getOrEmpty(CONTEXT_MAP);
+
 			if (maybeContextMap.isPresent()) {
 				log.accept(signal.getThrowable());
 			} else {
@@ -63,7 +66,6 @@ public class LogTrackUtils {
 			} else {
 				Map<String, String> ctxMap = new HashMap<>();
 				ctxMap.put(key, value);
-
 				return ctx.put(CONTEXT_MAP, ctxMap);
 			}
 		};

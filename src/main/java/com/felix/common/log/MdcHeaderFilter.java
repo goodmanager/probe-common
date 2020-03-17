@@ -1,5 +1,7 @@
-package com.felix.common.filter;
+package com.felix.common.log;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -16,6 +18,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toMap;
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class MdcHeaderFilter implements WebFilter {
 	private static final String MDC_HEADER = "X-MDC-TrackId";
 	public static final String CONTEXT_MAP = "context-map";
@@ -31,7 +34,7 @@ public class MdcHeaderFilter implements WebFilter {
 
 	private Context addRequestHeadersToContext(final ServerHttpRequest request, final Context context) {
 		final Map<String, String> contextMap = request.getHeaders().toSingleValueMap().entrySet().stream()
-				.filter(x -> x.getKey().startsWith(MDC_HEADER))
+				.filter(x -> x.getKey().equals(MDC_HEADER))
 				.collect(toMap(key -> MDC_HEADER, val -> val.setValue(UUID.randomUUID().toString())));
 
 		return context.put(CONTEXT_MAP, contextMap);
