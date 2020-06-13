@@ -8,25 +8,16 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator.Builder;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
 import com.felix.common.constant.JwtAlgorithmType;
 
 public class JwtUtils {
-	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-
 	/**
-	 * 创建jwt token
-	 * 当采用RSA和EC加密算法的时候需要相应的私钥和公钥
-	 * 当采用SHA相关算法的时候只需秘钥
+	 * 创建jwt token 当采用RSA和EC加密算法的时候需要相应的私钥和公钥 当采用SHA相关算法的时候只需秘钥
 	 * 
 	 * @param privateKey
 	 * @param publicKey
@@ -34,21 +25,20 @@ public class JwtUtils {
 	 * @param headerClaims
 	 * @param payloadClaims
 	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
 	 */
 	public static String createJwtToken(String privateKey, String publicKey, JwtAlgorithmType jwtAlgorithmType,
-			Map<String, Object> headerClaims, Map<String, Object> payloadClaims) {
-		try {
-			Algorithm algorithm = getAlgorithm(privateKey, publicKey, jwtAlgorithmType);
-			Builder jwtBuilder = JWT.create();
-			jwtBuilder.withHeader(headerClaims);
-			payloadClaims.forEach((key, value) -> {
-				jwtBuilder.withClaim(key, String.valueOf(value));
-			});
-			return jwtBuilder.sign(algorithm);
-		} catch (JWTCreationException | InvalidKeySpecException | NoSuchAlgorithmException exception) {
-			logger.error("创建jwtToken失败", exception);
-		}
-		return null;
+			Map<String, Object> headerClaims, Map<String, Object> payloadClaims)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+		Algorithm algorithm = getAlgorithm(privateKey, publicKey, jwtAlgorithmType);
+		Builder jwtBuilder = JWT.create();
+		jwtBuilder.withHeader(headerClaims);
+		payloadClaims.forEach((key, value) -> {
+			jwtBuilder.withClaim(key, String.valueOf(value));
+		});
+		return jwtBuilder.sign(algorithm);
 	}
 
 	/**
@@ -61,25 +51,24 @@ public class JwtUtils {
 	 * @param headerClaims
 	 * @param payloadClaims
 	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws InvalidKeySpecException
 	 */
 	public static DecodedJWT verifyJwtToken(String privateKey, String publicKey, String jwtToken,
-			JwtAlgorithmType jwtAlgorithmType, Map<String, Object> headerClaims, Map<String, Object> payloadClaims) {
-		try {
-			Algorithm algorithm = getAlgorithm(privateKey, publicKey, jwtAlgorithmType);
-			Builder jwtBuilder = JWT.create();
-			jwtBuilder.withHeader(headerClaims);
-			payloadClaims.forEach((key, value) -> {
-				jwtBuilder.withClaim(key, String.valueOf(value));
-			});
-			Verification require = JWT.require(algorithm);
-			payloadClaims.forEach((key, value) -> {
-				require.withClaim(key, String.valueOf(value));
-			});
-			return require.build().verify(jwtToken);
-		} catch (JWTVerificationException | InvalidKeySpecException | NoSuchAlgorithmException exception) {
-			logger.error("jwtToken验证失败", exception);
-		}
-		return null;
+			JwtAlgorithmType jwtAlgorithmType, Map<String, Object> headerClaims, Map<String, Object> payloadClaims)
+			throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+		Algorithm algorithm = getAlgorithm(privateKey, publicKey, jwtAlgorithmType);
+		Builder jwtBuilder = JWT.create();
+		jwtBuilder.withHeader(headerClaims);
+		payloadClaims.forEach((key, value) -> {
+			jwtBuilder.withClaim(key, String.valueOf(value));
+		});
+		Verification require = JWT.require(algorithm);
+		payloadClaims.forEach((key, value) -> {
+			require.withClaim(key, String.valueOf(value));
+		});
+		return require.build().verify(jwtToken);
 	}
 
 	private static Algorithm getAlgorithm(String privateKey, String publicKey, JwtAlgorithmType jwtAlgorithmType)

@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class PageVo {
 
-	private int totalPage = 0;
+	private int totalRecords = 0;
 
 	private int curPage = 1;
 
