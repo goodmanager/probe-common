@@ -17,8 +17,6 @@ public class BusinessException extends RuntimeException {
 
 	private int httpStatus;
 
-	private String message;
-
 	private Object[] objects;
 
 	public BusinessException(int errorCode, Object... objects) {
@@ -41,14 +39,6 @@ public class BusinessException extends RuntimeException {
 
 	public void setHttpStatus(int httpStatus) {
 		this.httpStatus = httpStatus;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public Object[] getObjects() {

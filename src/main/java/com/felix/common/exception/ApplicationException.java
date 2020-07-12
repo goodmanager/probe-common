@@ -1,15 +1,10 @@
 package com.felix.common.exception;
 
-import lombok.ToString;
-
-@ToString
 public class ApplicationException extends RuntimeException {
 
 	private static final long serialVersionUID = 3183257827849708210L;
 
 	private int errorCode;
-
-	private String message;
 
 	private int httpStatus;
 
@@ -27,14 +22,6 @@ public class ApplicationException extends RuntimeException {
 
 	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public int getHttpStatus() {

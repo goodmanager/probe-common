@@ -41,7 +41,7 @@ public class DateTimeUtils {
 		} else if (dateTimeUnit == DateTimeUnit.HOURS) {
 			return HOURS.between(startdateTime, endDateTime);
 		} else if (dateTimeUnit == DateTimeUnit.MINUTES) {
-			return MILLENNIA.between(startdateTime, endDateTime);
+			return MINUTES.between(startdateTime, endDateTime);
 		} else {
 			return SECONDS.between(startdateTime, endDateTime);
 		}
